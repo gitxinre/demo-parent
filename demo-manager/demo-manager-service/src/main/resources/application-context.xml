@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <!-- dao 1、数据源 -->
+
+    <!-- dao 2、sqlSessionFactory -->
+
+    <!-- dao 3、mapper映射文件扫描器 -->
+
+    <!-- service 1、扫描所有bean service中的 -->
+
+    <!-- service 2、事务 -->
+
+
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <!-- 忽略掉不能处理的占位 -->
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:properties/db.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${db.driverClassName}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="initialSize" value="3"/>
+        <property name="minIdle" value="3"/>
+        <property name="maxActive" value="20"/>
+        <property name="maxWait" value="60000"/>
+        <property name="filters" value="stat,wall"/>
+    </bean>
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.ly.demo.service">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>
+        <!-- 全局异常等使用的注解 -->
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestControllerAdvice"/>
+    </context:component-scan>
+
+
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--<property name="mapperLocations" value="classpath:mapper/*.xml"/>-->
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="com.ly.dao"/>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- druid -->
+    <bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+        <!-- 慢sql需要我们去处理 -->
+        <property name="slowSqlMillis" value="3000"/>
+        <!-- 慢sql以日志的形式存储-->
+        <property name="logSlowSql" value="true"/>
+        <!-- 写了很多行的sql ，merge到一起 -->
+        <property name="mergeSql" value="true"/>
+    </bean>
+
+    <bean id="wall-filter" class="com.alibaba.druid.wall.WallFilter">
+        <property name="dbType" value="mysql"/>
+    </bean>
+
+    <!-- dubbo发布服务 - start -->
+    <!-- zookeeper -->
+    <dubbo:application name="demo-manager-service"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.65.10:2181"/>
+    <dubbo:protocol name="dubbo" port="28001"/>
+    <dubbo:service interface="com.ly.demo.service.UserService" ref="userServiceImpl"/>
+    <!-- multicast -->
+    <!--<dubbo:application name="demo-manager-service-multicast"/>
+    <dubbo:registry address="multicast://224.5.6.7:1234" />
+    <dubbo:protocol name="dubbo" port="20881" />
+    <dubbo:service interface="com.ly.demo.service.UserService" ref="userServiceImpl"/>-->
+    <!-- dubbo发布服务 - end -->
+
+    <!--<bean class="com.ly.common.GlobalExceptionProcessor"/>-->
+</beans>

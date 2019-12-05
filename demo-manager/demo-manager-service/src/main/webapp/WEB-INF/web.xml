@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <!-- web.xml中标签顺序 -->
+    <!--
+    (((description*, display-name*, icon*)) | 
+     distributable | context-param | filter | filter-mapping | listener 
+     | servlet | servlet-mapping | session-config | mime-mapping | 
+     welcome-file-list | error-page | jsp-config | security-
+     constraint | login-config | security-role | ((env-entry*, ejb-ref*, 
+     ejb-local-ref*, ((service-ref*)), resource-ref*, resource-env-
+     ref*, message-destination-ref*, persistence-context-ref*, 
+     persistence-unit-ref*, post-construct*, pre-destroy*)) | 
+     message-destination | locale-encoding-mapping-list)*
+    -->
+    <display-name>demo-manager-service</display-name>
+    
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:application-context.xml</param-value>
+    </context-param>
+    
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
+
+</web-app>

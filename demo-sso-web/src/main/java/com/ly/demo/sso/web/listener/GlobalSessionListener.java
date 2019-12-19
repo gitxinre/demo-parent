@@ -18,7 +18,7 @@ public class GlobalSessionListener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
 
-        System.out.println("httpSessionEvent.getSession().getId() = " + httpSessionEvent.getSession().getId());
+        System.out.println("Created GlobalSessionListener Session().getId() = " + httpSessionEvent.getSession().getId());
 
     }
 
@@ -26,7 +26,7 @@ public class GlobalSessionListener implements HttpSessionListener {
     @Override
     public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
 
-        System.out.println("httpSessionEvent.getSession().getId() = " + httpSessionEvent.getSession().getId());
+        System.out.println("Destroyed GlobalSessionListener Session().getId() = " + httpSessionEvent.getSession().getId());
         HttpSession session = httpSessionEvent.getSession();
         // 1、获取全局session中tokenId信息
         String tokenId = (String) session.getAttribute("tokenId");

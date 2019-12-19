@@ -8,9 +8,9 @@
     <!--
     (((description*, display-name*, icon*)) | 
      distributable | context-param | filter | filter-mapping | listener 
-     | servlet | servlet-mapping | session-config | mime-mapping | 
-     welcome-file-list | error-page | jsp-config | security-
-     constraint | login-config | security-role | ((env-entry*, ejb-ref*, 
+     | servlet | servlet-mapping | session-cfg | mime-mapping | 
+     welcome-file-list | error-page | jsp-cfg | security-
+     constraint | login-cfg | security-role | ((env-entry*, ejb-ref*, 
      ejb-local-ref*, ((service-ref*)), resource-ref*, resource-env-
      ref*, message-destination-ref*, persistence-context-ref*, 
      persistence-unit-ref*, post-construct*, pre-destroy*)) | 

@@ -15,6 +15,8 @@
         <module>demo-sso-web</module>
         <module>demo-sso-client-crm</module>
         <module>demo-sso-client-wms</module>
+        <module>demo-springboot</module>
+        <module>demo-springcloud</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -24,7 +26,8 @@
     <properties>
 
         <junit.version>4.12</junit.version>
-        <spring.version>4.3.16.RELEASE</spring.version>
+        <springboot.version>2.0.8.RELEASE</springboot.version>
+        <spring.version>5.0.12.RELEASE</spring.version>  <!-- 4.3.16.RELEASE -->
         <logback.version>1.2.3</logback.version>
         <slf4j.version>1.7.25</slf4j.version>
         <jackson.version>2.9.8</jackson.version>
@@ -49,13 +52,16 @@
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
         <commons-logging.version>1.2</commons-logging.version>
         <pinyin4j.version>2.5.1</pinyin4j.version>
+        <swagger2.version>2.8.0</swagger2.version>
+        <byte-buddy.veriosn>1.10.1</byte-buddy.veriosn>
 
 
         <mybatis.version>3.2.8</mybatis.version>
         <mybatis.spring.version>1.2.2</mybatis.spring.version>
         <mybatis.paginator.version>1.2.15</mybatis.paginator.version>
         <mysql.version>5.1.46</mysql.version>
-        <httpclient.version>4.5.3</httpclient.version>
+        <httpclient.version>4.5.8</httpclient.version>
+        <httpcore.version>4.4.12</httpcore.version>
         <jstl.version>1.2</jstl.version>
         <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
         <servlet-api.version>2.5</servlet-api.version>
@@ -74,6 +80,56 @@
     <dependencyManagement>
         <dependencies>
 
+            <!-- SpringBoot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${springboot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aspects</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jms</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
             <!-- 工具 -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -156,6 +212,11 @@
                 <artifactId>httpclient</artifactId>
                 <version>${httpclient.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>${httpcore.version}</version>
+            </dependency>
             <!-- quartz任务调度框架 -->
             <dependency>
                 <groupId>org.quartz-scheduler</groupId>
@@ -223,47 +284,8 @@
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-            <!-- Spring -->
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-beans</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-web</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-webmvc</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-jdbc</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-aspects</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-jms</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context-support</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
+
+
             <!-- JSP相关 -->
             <dependency>
                 <groupId>jstl</groupId>
@@ -392,6 +414,22 @@
                 <version>${freemarker.version}</version>
             </dependency>
 
+            <!-- swagger2 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>${byte-buddy.veriosn}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

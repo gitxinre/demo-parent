@@ -5,7 +5,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.ly.demo.sso.web.entity.dto.ClientInfoDTO;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.ArrayStack;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author xinre
@@ -32,6 +34,7 @@ public class SSOController {
     @RequestMapping("/checkLogin")
     public String checkLogin(String redirectUrl, HttpServletRequest request, HttpSession session, Map<String, Object> model) {
 
+        System.out.println("===/checkLogin");
         System.out.println("checkLogin session = " + session.getId());
         prientCookieInfo(request);
 
@@ -59,6 +62,7 @@ public class SSOController {
     @RequestMapping("/login")
     public String login(String username, String password, String redirectUrl, HttpServletRequest request, HttpServletResponse response, HttpSession session, Map<String, Object> model) {
 
+        System.out.println("===/login");
         System.out.println("login session = " + session.getId());
         prientCookieInfo(request);
 
@@ -118,6 +122,7 @@ public class SSOController {
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request, HttpSession session) {
 
+        System.out.println("===/logout");
         System.out.println("logout session = " + session.getId());
         prientCookieInfo(request);
 

@@ -34,7 +34,6 @@
     <!--<context:component-scan base-package="com.ly.demo.common."/>-->
 
 
-
     <!-- mvc 3、InternalResourceViewResolver 试图解析器（逻辑转物理） ,由于试图解析器没有配置id，故springmvc在获取试图解析器的时候是按照类型进行获取的 -->
     <!-- 视图解析器 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -62,6 +61,7 @@
     <dubbo:application name="demo-web"/>
     <dubbo:registry protocol="zookeeper" address="192.168.65.10:2181"/>
     <dubbo:reference id="userService" interface="com.ly.demo.service.UserService"/>
+
     <!-- multicast -->
     <!--<dubbo:application name="demo-web-multicast"/>
     <dubbo:registry address="multicast://224.5.6.7:1234" />

@@ -13,4 +13,8 @@
         <filter-name>SSOClientFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <listener>
+        <listener-class>com.ly.demo.sso.client.crm.listener.ClientLocalSessionListener</listener-class>
+    </listener>
 </web-app>

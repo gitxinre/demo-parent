@@ -23,7 +23,12 @@
 
         <dependency>
             <groupId>com.ly</groupId>
-            <artifactId>demo-manager-dao</artifactId>
+            <artifactId>demo-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ly</groupId>
+            <artifactId>demo-dao</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

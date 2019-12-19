@@ -6,17 +6,23 @@
         <artifactId>demo-parent</artifactId>
         <groupId>com.ly</groupId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>demo-springcloud</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>demo-springcloud-web</artifactId>
 
-    <name>demo-springcloud</name>
+    <name>demo-springcloud-web</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
-    <modules>
-        <module>demo-springcloud-web</module>
-    </modules>
+
+
+    <!--<dependencies>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+    </dependencies>-->
+
 
 </project>

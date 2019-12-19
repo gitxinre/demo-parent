@@ -1,9 +1,11 @@
 package com.ly.demo.service.impl;
 
+
 import com.ly.demo.common.util.IdGenerator;
 import com.ly.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 
 /**
  * @author xinre

@@ -1,5 +1,6 @@
 package com.ly.demo.springboot.web.controller;
 
+import com.ly.demo.common.util.IdGenerator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ public class UserController {
     @ResponseBody
     public String getUserName(@PathVariable(value = "id") String id, Map<String, Object> map) {
 
-        String userId = UUID.randomUUID().toString();
+        String userId = IdGenerator.guid();
         map.put("result", userId);
         System.out.println("result = " + userId);
         return userId;

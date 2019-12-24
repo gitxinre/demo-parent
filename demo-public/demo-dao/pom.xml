@@ -28,7 +28,7 @@
 
         <dependency>
             <groupId>com.ly</groupId>
-            <artifactId>demo-manager-pojo</artifactId>
+            <artifactId>demo-entity</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

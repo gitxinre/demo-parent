@@ -9,17 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>demo-public</artifactId>
+    <artifactId>demo-mq</artifactId>
     <packaging>pom</packaging>
 
-    <name>demo-public</name>
+    <name>demo-mq</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
     <modules>
-        <module>demo-common</module>
-        <module>demo-dao</module>
-        <module>demo-entity</module>
-        <module>demo-cache</module>
+        <module>demo-mq-producer</module>
+        <module>demo-mq-consumer</module>
     </modules>
 
 

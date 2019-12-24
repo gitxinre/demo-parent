@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!-- 1、真正connectionFactory 配置相应的实现 JMS服务 的 实现类 -->
+    <bean id="realConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://192.168.65.10:61616"/>
+    </bean>
+
+    <!-- 2、spring用户管理真正connectionFactory 的 connectionFactory -->
+    <bean id="connectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+        <property name="targetConnectionFactory" ref="realConnectionFactory"/>
+    </bean>
+
+    <!-- 3、jmsTemplate -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+    </bean>
+
+    <!-- 4、可以配置消息 destination （queue或者topic）-->
+    <bean id="test-queue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg name="name" value="test-queue"/>
+    </bean>
+    <bean id="test-topic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg name="name" value="test-topic"/>
+    </bean>
+
+    <!-- 5、配置消息接收者 -->
+    <bean id="myQueueMessageListener" class="com.ly.demo.mq.consumer.activemq.listener.MyQueueMessageListener"/>
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="test-queue"/>
+        <property name="messageListener" ref="myQueueMessageListener"/>
+    </bean>
+
+    <bean id="myTopicMessageListener01" class="com.ly.demo.mq.consumer.activemq.listener.MyTopicMessageListener01"/>
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="test-topic"/>
+        <property name="messageListener" ref="myTopicMessageListener01"/>
+    </bean>
+
+    <bean id="myTopicMessageListener02" class="com.ly.demo.mq.consumer.activemq.listener.MyTopicMessageListener02"/>
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="test-topic"/>
+        <property name="messageListener" ref="myTopicMessageListener02"/>
+    </bean>
+
+    <bean id="myTopicMessageListener03" class="com.ly.demo.mq.consumer.activemq.listener.MyTopicMessageListener03"/>
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="test-topic"/>
+        <property name="messageListener" ref="myTopicMessageListener03"/>
+    </bean>
+
+
+</beans>

@@ -17,12 +17,12 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>../logs/hq-bpmn.log</File>
+        <File>../logs/demo.log</File>
         <encoder>
             <pattern>%date [%level] [%thread] %logger{80} [%file : %line] %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>../logs/hq-bpmn.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <fileNamePattern>../logs/demo.log.%d{yyyy-MM-dd}</fileNamePattern>
         </rollingPolicy>
     </appender>
 

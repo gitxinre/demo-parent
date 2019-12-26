@@ -18,6 +18,7 @@
         <module>demo-springboot</module>
         <module>demo-springcloud</module>
         <module>demo-mq</module>
+        <module>demo-webpage-static</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -77,7 +78,7 @@
         <solrj.version>4.10.3</solrj.version>
         <activemq.version>5.11.2</activemq.version> <!-- 5.11.2版本没有spring相关代码不会冲突，5.15.9版本有冲突 -->
         <javax.jms-api.version>2.0.1</javax.jms-api.version>
-        <freemarker.version>2.3.23</freemarker.version>
+        <freemarker.version>2.3.28</freemarker.version> <!-- 2.3.23 -->
         <quartz.version>2.2.2</quartz.version>
     </properties>
     <dependencyManagement>
